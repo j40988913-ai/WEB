@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  color: #f8fafc;
+  min-height: 100vh;
+}
+
+nav {
+  min-height: 70px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pic {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+h2 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.link:hover {
+  background-color: #ffd700;
+  color: #0f172a;
+  border-color: #ffd700;
+}
+
+
+.greeting-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 25px auto 15px auto;
+  padding: 0 10px;
+}
+
+.greeting-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.greeting-title::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 28px;
+  background-color: #ffd700;
+  border-radius: 4px;
+}
+
+/* CAROUSEL */
+.scroll-carousel {
+  display: flex;
+  width: 90%;
+  max-width: 800px;
+  height: 90%;
+  margin: 15px auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-carousel img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+}
+
+
+@media (max-width: 600px) {
+  nav {
+
+    flex-direction: column; 
+    justify-content: center;
+    padding: 12px 10px;
+    gap: 10px; 
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .link {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .greeting-title {
+    font-size: 1.2rem;
+  }
+
+  .greeting-title::before {
+    height: 22px;
+  }
+
+  .scroll-carousel {
+    width: 95%;
+    height: 80%;
+  }
+}
+footer {
+  position: fixed;
+  bottom: 20px;     
+  right: 20px;  
+  z-index: 999;       
+}
+
+
+footer a {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+footer a:hover {
+  background-color: #ffd700;
+  color: #0f172a;
+  border-color: #ffd700;
+  transform: translateY(-2px);
+}
+
+.school-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 90%;
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card h3 {
+  color: #ffd700;
+  font-size: 1.5rem;
+}
+
+.stat-card p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}

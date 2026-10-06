@@ -1,0 +1,305 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  color: #f8fafc;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.portal-header {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.school-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ffffff;
+  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-text h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+.header-text h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  color: #ffd700;
+}
+
+/* Main Container & Card */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  width: 100%;
+  max-width: 450px;
+  padding: 35px 30px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.register-card h3 {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Form Inputs */
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group input:focus {
+  border-color: #ffd700;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+}
+
+/* Leave room on the right of the password field so typed text
+   does not slide underneath the show/hide password icon. */
+.form-group input[type="password"] {
+  padding-right: 44px;
+}
+
+/* Show/Hide Password Toggle.
+   NOTE: This button must sit INSIDE a .form-group (the password one)
+   so that position: absolute anchors to the field, not the page. */
+.toggle-eye {
+  position: absolute;
+  right: 14px;
+  top: 38px;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s ease-in-out;
+}
+
+.toggle-eye:hover,
+.toggle-eye:focus-visible {
+  color: #ffd700;
+}
+
+.toggle-eye:focus-visible {
+  outline: none;
+}
+
+/* Buttons & Links */
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffd700;
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-submit:hover {
+  background-color: #e6c200;
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-link a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.modal-box {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 25px 20px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  animation: modalPop 0.25s ease-out;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.modal-box h3 {
+  font-size: 1.2rem;
+  color: #ffd700;
+  margin-bottom: 8px;
+}
+
+.modal-box p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.btn-modal {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffd700;
+  color: #0f172a;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-modal:hover {
+  background-color: #e6c200;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .portal-header {
+    padding: 12px 15px;
+    gap: 12px;
+  }
+  .school-logo {
+    width: 45px;
+    height: 45px;
+  }
+  .header-text h2 {
+    font-size: 0.9rem;
+  }
+  .header-text h1 {
+    font-size: 1.25rem;
+  }
+  .register-card {
+    padding: 25px 20px;
+  }
+  .register-card h3 {
+    font-size: 1.4rem;
+  }
+}

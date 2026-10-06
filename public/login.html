@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batobalani NHS - Log In</title>
+  <link rel="stylesheet" href="login.css?v=2">
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+  <meta property="og:title" content="BNHS Portal">
+  <meta property="og:description" content="Batobalani National High School.">
+  <meta property="og:image" content="https://bnhsportal.online/assets/logo.jpg">
+  
+</head>
+
+<body>
+  <header class="portal-header">
+    <img src="/assets/logo.jpg" alt="Batobalani NHS Logo" class="school-logo">
+    <div class="header-text">
+      <h2>Batobalani National High School</h2>
+      <h1>PORTAL</h1>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <div class="register-card">
+      <h3>Welcome Back</h3>
+      <p class="subtitle">Log in to your portal account</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginIdentifier">LRN /Email</label>
+          <input type="text" id="loginIdentifier" placeholder="Enter your LRN, ID, or Email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+          <button type="button" id="togglePassword" class="toggle-eye" aria-label="Show password">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+
+        <button type="submit" class="btn-submit">Log In</button>
+      </form>
+
+      <p class="login-link">
+        Don't have an account? <a href="register.html">Register here</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- POP-UP MODAL -->
+  <div id="showModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <div class="modal-icon" id="modalIcon">⚠️</div>
+      <h3 id="modalTitle">Notice</h3>
+      <p id="modalMessage">Message here...</p>
+      <button type="button" class="btn-modal" id="modalCloseBtn">Ok</button>
+    </div>
+  </div>
+
+  <script src="login.js?v=1"></script>
+  <script src="/assets/offline-banner.js"></script>
+</body>
+
+</html>

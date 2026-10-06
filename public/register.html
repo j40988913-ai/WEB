@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batobalani NHS - Create Account</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+  <meta property="og:title" content="BNHS Portal">
+  <meta property="og:description" content="Batobalani National High School.">
+  <meta property="og:image" content="https://bnhsportal.online/assets/logo.jpg">
+  
+  <link rel="stylesheet" href="sign-in.css">
+  
+  <!-- GOOGLE IDENTITY SERVICES SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+  <header class="portal-header">
+    <img src="/assets/logo.jpg" alt="Batobalani NHS Logo" class="school-logo">
+    <div class="header-text">
+      <h2>Batobalani National High School</h2>
+      <h1>PORTAL</h1>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <div class="register-card">
+      <h3>Create Account</h3>
+      <p class="subtitle" id="stepSubtitle">Choose how you want to get started</p>
+
+      <!-- STEP 1: GOOGLE AUTHENTICATION -->
+      <div class="auth-options" id="googleAuthSection">
+        <div id="g_id_onload"
+             data-client_id="416986098834-aopn65addae1ssnqnea8ni63m4vaiees.apps.googleusercontent.com"
+             data-callback="handleGoogleCallback"
+             data-ux_mode="popup"
+             data-use_fedcm_for_prompt="true">
+        </div>
+        <div class="g_id_signin" data-type="standard" data-width="320"></div>
+
+        <p style="text-align:center; margin-top: 14px;">
+          <a href="#" id="manualRegisterLink" style="color:#ffd700; font-size: 13px; text-decoration: underline;">
+            May problema ang Google Sign-In? Mag-register nang manual
+          </a>
+        </p>
+      </div>
+
+      <!-- STEP 2: SCHOOL DETAILS FORM (Nakatago sa simula) -->
+      <form id="registerForm" style="display: none;">
+        <hr class="form-divider">
+        <h4>Complete School Information</h4>
+
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" placeholder="Juan Dela Cruz" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lrn">LRN / Employee ID</label>
+          <input type="number" id="lrn" maxlength="12" placeholder="12-digit LRN / ID" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Gumawa ng Password" required minlength="6">
+          <button type="button" id="togglePassword" class="toggle-eye" aria-label="Show password">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" required>
+            <option value="">-- Select Role --</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
+          </select>
+        </div>
+
+        <!-- ADDITIONAL FIELDS FOR STUDENT ONLY -->
+        <div id="studentFields" style="display: none; flex-direction: column; gap: 12px;">
+          <div class="form-group">
+            <label for="gradeLevel">Grade Level</label>
+            <select id="gradeLevel">
+              <option value="">-- Select Grade Level --</option>
+              <option value="Grade 7">Grade 7</option>
+              <option value="Grade 8">Grade 8</option>
+              <option value="Grade 9">Grade 9</option>
+              <option value="Grade 10">Grade 10</option>
+              <option value="Grade 11">Grade 11</option>
+              <option value="Grade 12">Grade 12</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="section">Section</label>
+            <select id="section">
+              <option value="">-- Piliin muna ang Grade Level --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="adviser">Adviser Name</label>
+            <select id="adviser">
+              <option value="">-- Select Adviser --</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ADDITIONAL FIELDS FOR TEACHER ONLY -->
+        <div id="teacherFields" style="display: none; flex-direction: column; gap: 12px;">
+          <div class="form-group">
+            <label style="display:flex; align-items:center; gap:8px; font-weight:normal;">
+              <input type="checkbox" id="nonTeaching" style="width:auto;">
+              Non-teaching (Guard / Staff - walang hawak na Advisory Class)
+            </label>
+          </div>
+
+          <div id="teacherAdvisoryFields" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="form-group">
+              <label for="teacherGradeLevel">Grade Level na Tinuturuan</label>
+              <select id="teacherGradeLevel">
+                <option value="">-- Select Grade Level --</option>
+                <option value="Grade 7">Grade 7</option>
+                <option value="Grade 8">Grade 8</option>
+                <option value="Grade 9">Grade 9</option>
+                <option value="Grade 10">Grade 10</option>
+                <option value="Grade 11">Grade 11</option>
+                <option value="Grade 12">Grade 12</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="teacherSection">Section (Advisory Class)</label>
+              <input type="text" id="teacherSection" placeholder="hal. Simplicity" maxlength="100">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" style="margin-top: 15px;">Complete Registration</button>
+      </form>
+
+      <p class="login-link">
+        Already have an account? <a href="login.html">Log In here</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- POP-UP MODAL -->
+  <div id="showModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <div class="modal-icon" id="modalIcon">⚠️</div>
+      <h3 id="modalTitle">Notice</h3>
+      <p id="modalMessage">Message here...</p>
+      <button type="button" class="btn-modal" id="modalCloseBtn">Ok</button>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
+  <script src="/assets/offline-banner.js"></script>
+</body>
+</html>

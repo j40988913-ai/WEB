@@ -1,0 +1,133 @@
+/* =========================================
+   BNHS Handbook Portal
+   Color Theme: Navy Glass + Gold (matches student/admin portal)
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* =========================================
+   Handbook Container
+   ========================================= */
+.handbook {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border-top: 4px solid #ffd700;
+}
+
+/* =========================================
+   Header / Title Section
+   ========================================= */
+.handbook-header {
+  background: rgba(15, 23, 42, 0.85);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.handbook-header h1 {
+  font-family: 'Merriweather', serif;
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.handbook-header p {
+  color: #ffd700;
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   IFrame Wrapper
+   ========================================= */
+.handbook iframe {
+  display: block;
+  width: 100%;
+  height: 75vh;
+  border: none;
+  background-color: #f8fafc;
+}
+
+/* =========================================
+   Footer / Signature
+   ========================================= */
+.handbook-footer {
+  background: rgba(15, 23, 42, 0.9);
+  padding: 1rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.handbook-footer span {
+  color: #ffd700;
+  font-weight: 500;
+}
+
+/* =========================================
+   Responsive Adjustments
+   ========================================= */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+
+  .handbook {
+    border-radius: 12px;
+  }
+
+  .handbook-header {
+    padding: 1.2rem 1rem;
+  }
+
+  .handbook-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .handbook-header p {
+    font-size: 0.8rem;
+  }
+
+  .handbook iframe {
+    height: 80vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .handbook-header h1 {
+    font-size: 1.1rem;
+  }
+
+  .handbook iframe {
+    height: 85vh;
+  }
+}
