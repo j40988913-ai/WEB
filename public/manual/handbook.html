@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="tl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Handbook Viewer</title>
+  <style>
+    :root {
+      --primary: #1b365d;
+      --major: #d97706;
+      --grave: #dc2626;
+      --bg: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      margin: 0;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Sticky Search Bar sa Itaas */
+    .search-container {
+      position: sticky;
+      top: 10px;
+      width: 100%;
+      max-width: 1100px; /* Mas malapad para sa PC */
+      z-index: 100;
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      margin-bottom: 25px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-container input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px rgba(27, 54, 93, 0.3);
+    }
+
+    /* Responsive Book Container */
+    .book {
+      width: 100%;
+      max-width: 1100px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      min-height: 80vh;
+      position: relative;
+    }
+
+    .book-title {
+      text-align: center;
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 25px;
+      border-bottom: 3px double var(--primary);
+      padding-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    /* Grid Layout para sa mga Kategorya ng Rules */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: 1fr; /* Default: 1 Column para sa Mobile */
+      gap: 25px;
+    }
+
+    /* Design ng bawat Kategorya */
+    .category-block {
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .section-title {
+      color: white;
+      background: var(--primary);
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title.major { background: var(--major); }
+    .section-title.grave { background: var(--grave); }
+
+    /* List Item Cards */
+    ul.rule-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.rule-list li {
+      background: #ffffff;
+      margin-bottom: 10px;
+      padding: 12px 15px;
+      border-radius: 6px;
+      border-left: 4px solid #cbd5e1;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+    }
+
+    /* Highlight style sa Search */
+    mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+
+    .no-result {
+      display: none;
+      text-align: center;
+      color: #64748b;
+      font-style: italic;
+      padding: 20px;
+      font-size: 1.1rem;
+    }
+
+    .no-select {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* ========================================================
+       MEDIA QUERIES (RESPONSIVE STYLES PARA SA TABLET AT PC)
+       ======================================================== */
+
+    /* Tablet Screen View (768px pataas) */
+    @media (min-width: 768px) {
+      body {
+        padding: 30px;
+      }
+
+      /* Ginagawang 2 Columns ang layout na parang bukas na libro */
+      .rules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Ang Grave Offense ay ilalagay sa ilalim at kakaanin sa PC para maayos ang balance */
+      .category-block.grave-block {
+        grid-column: span 2;
+      }
+    }
+
+    /* Large PC / Desktop View (1024px pataas) */
+    @media (min-width: 1024px) {
+      .book {
+        padding: 45px;
+        /* Visual Spine sa gitna kapag nasa PC view */
+        background: linear-gradient(to right, #ffffff 0%, #ffffff 48%, #e2e8f0 50%, #ffffff 52%, #ffffff 100%);
+        border-left: 12px solid #0f172a;
+      }
+    }
+  </style>
+</head>
+
+<body class="no-select" oncontextmenu="return false;">
+
+  <!-- Search Bar Header -->
+  <div class="search-container">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="🔍 Mag-search ng rule (Hal. late, uniporme, cellphone, cutting)..."
+    >
+  </div>
+
+  <!-- Book Container -->
+  <div class="book">
+    <h1 class="book-title">STUDENT HANDBOOK</h1>
+
+    <div id="noResult" class="no-result">Walang nahanap na patakaran sa iyong hinahanap.</div>
+
+    <div class="rules-grid">
+
+      <!-- MINOR OFFENSES -->
+      <div class="category-block">
+        <div class="section-title">Minor Offenses</div>
+        <ul class="rule-list">
+          <li>1. Bawal ang pagkakalat ng basura sa loob at labas ng paaralan.</li>
+          <li>2. Bawal ang pag-iingay sa loob at labas ng silid-aralan lalo na kung may nagkaklase.</li>
+          <li>3. Bawal ang hindi maayos at maingat na paggamit ng mga pasilidad ng paaralan tulad ng banyo at iba pa.</li>
+          <li>4. Dapat ay nasa loob na ng paaralan ang mag-aaral bago o eksaktong 7:15 ng umaga para sa flag raising ceremony.</li>
+          <li>5. Bago magsimula ang bawat klase, dapat ay nasa loob na sila ng silid-aralan. Magsisimula ito ng 7:30 at magtatapos ng 11:45 sa umaga at 1:00 naman ang simula sa hapon at magtatapos ng 4:00.</li>
+          <li>6. Sa bawat pagliban ng mag-aaral sa klase, dapat siyang magbigay ng excuse letter na pirmado ng kanyang magulang o tagapangalaga sa kanyang pagbalik.</li>
+          <li>7. Mabibigyan lamang ng pagkakataong makakuha ng mga espesyal na eksaminasyon o pagsusulit ang mag-aaral kung ang dahilan ng kanyang pagliban ay nagkasakit, immediate family emergency, financial constraints o naging kinatawan ng paaralan sa mga paligsahan.</li>
+          <li>8. Kung ang pagliban ng mag-aaral ay aabot sa higit 20% ng kabuuang bilang ng araw ng pasok sa buong taon, siya ay awtomatikong bagsak.</li>
+          <li>9. Maikokonsiderang late ang isang mag-aaral sa kanyang klase kung nahuli siya ng 10 minuto sa opisyal na oras ng pagpasok.</li>
+          <li>10. Ang uniporme ng mga lalaking mag-aaral ay puting polo na may kuwelyo, kulay asul na pantalon, sapatos at medyas. Para naman sa mga babae, puting blusa na may kuwelyo, paldang kulay asul na may habang lampas tuhod, sapatos at medyas. (*Kung walang maisuot na unipormeng pantaas, maaaring pamalit ang puting T-Shirt).</li>
+          <li>11. Sa mga araw na pinapayagang magsuot ng mga kaswal na kasuotan, hindi kabilang sa mga pinahihintulutan ang see-through, ripped jeans, shorts, tube, spaghetti strap, backless, sleeveless, maiiksing palda at mga paldang may slit o hiwa.</li>
+          <li>12. Hindi pinapayagang isuot ang uniporme ng paaralan sa mga hindi kaaya-ayang lugar tulad ng beerhouse, disco o sugalan.</li>
+          <li>13. Bago pumasok ng paaralan, kinakailangang suot na ng mag-aaral ang kanyang school ID.</li>
+          <li>14. Ang tamang gupit ng buhok ng lalaki ay 2x3 o military/barber's cut. Ipinagbabawal ang mga mearteng pag-aahit ng buhok tulad ng paglalagay ng pa-kidlat na hiwa sa kilay at ulo.</li>
+          <li>15. Para sa mga babaeng myembro ng LGBTQIA+, pwedeng magpagupit ng 2x3 o military/barber's cut kung kanila nanaisin. Ang mga lalaking miyembro naman ay pwedeng magpahaba ng kanilang buhok basta ito ay palaging disenteng tingnan.</li>
+          <li>16. Bawal ang pag-aapply ng artipisyal na kulay o mga pampatingkad ng buhok sa lahat ng mga mag-aaral.</li>
+          <li>17. Ipinagbabawal din ang paglalagay ng nail polish sa mga kuko ng mag-aaral gayundin ang paglalagay ng make-up.</li>
+          <li>18. Bawal din ang pagtalon/pagdaan sa bakod para makapasok o makalabas ng paaralan.</li>
+          <li>19. Ipinagbabawal din ang pagka-cutting classes o pagtakas sa klase ng walang sapat na dahilan.</li>
+          <li>20. Para sa mga lalaking mag-aaral, ipinagbabawal ang pagkakaroon ng hikaw sa alinmang bahagi ng katawan gayundin ang pagkakaroon ng tattoo.</li>
+          <li>21. Hindi pinapayagan ang paggamit ng cellphone o ano pa mang gadget sa loob ng silid-aralan maliban kung may emergency o pahintulot ng guro na gamitin ito para sa leksyon o di kaya'y oras ng recess 9:31-9:44 at tanghalian 11:46-12:59.</li>
+          <li>22. Hindi rin pinahihintulatan ang mga mag-aaral na magcharge ng kanilang cellphone o gadgets sa paaralan maliban kung may emergency.</li>
+          <li>23. Maaaring kumpiskahin ng tagapayo o gurong nakatalaga sa oras na iyon ang mga gadgets ng mag-aaral kung ito ay ginamit ng walang pahintulot.</li>
+          <li>24. Bawal din ang pagtatambay/pagkakalat o paglalaboy sa loob ng paaralan lalo na kung oras ng klase.</li>
+          <li>25. Bawal din ang hindi otorisadong paggamit ng mga kagamitan ng paaralan.</li>
+        </ul>
+      </div>
+
+      <!-- MAJOR OFFENSES -->
+      <div class="category-block">
+        <div class="section-title major">Major Offenses</div>
+        <ul class="rule-list">
+          <li>1. Dapat ay itrato ng mga mag-aaral ng may paggalang at respeto ang mga kapwa nila mag-aaral, mga guro at mga empleyado ng paaralan.</li>
+          <li>2. Bawal ang pagvavandal sa mga pader at anumang pagmamay-ari ng paaralan gayundin ang pagsira ng mga gamit o pasilidad nito.</li>
+          <li>3. Mahigpit ding ipinagbabawal ang mangopya sa kaklase, gumamit ng kodigo at magpakopya o iba pang uri ng pandaraya.</li>
+          <li>4. Ang pagmumura, pagsambit ng mga malalaswa at mga hindi kanais-nais na pananalita na nakapananakit at derogatibo ay mahigpit na ipinagbabawal sa lahat ng mag-aaral.</li>
+          <li>5. Bawal din ang panunukso o paggatong upang magpasimula ng away ganundin ang paghahamon ng away sa loob at labas ng paaralan lalo na kung nakasuot ng uniporme.</li>
+          <li>6. Bawal din ang pakikipagsuntukan o pakikipagsabunutan sa loob at labas ng paaralan.</li>
+          <li>7. Bawal din ang pagsusugal o mga gawaing may pustahan sa loob ng paaralan.</li>
+          <li>8. Bawal ang paglalathala ng mga malalaswang gawa/kilos at pananalita sa social media.</li>
+          <li>9. Bawal ang lantarang pagpapakita ng apeksyon sa kapwa mag-aaral tulad ng pakikipaghalikan, paghahawakan ng kamay, akbayan, pakikipagyakapan at kahaintulad na gawain.</li>
+          <li>10. Ipinagbabawal din ang sexting o name calling habang suot ang uniporme ng paaralan.</li>
+          <li>11. Ipinagbabawal din ang palsipikasyon ng dokumento tulad ng pagpeke ng card/excuse letter, panggagaya ng pirma at iba pang kahalintulad na gawain.</li>
+          <li>12. Bawal din ang pagpasok ng nakainom, pagdadala, pagbebenta o pag inom ng anumang ng nakakalasing na inumin sa paaralan.</li>
+          <li>13. Bawal din ang paninigarilyo o pagve-vape at pagdadala, pagbebenta o paggamit nito sa loob at labas ng paaralan.</li>
+          <li>14. Bawal din ang pagdadala ng mga nakakamatay na armas sa loob ng paaralan.</li>
+          <li>15. Bawal din ang pag upload ng mga video, litrato o post na nakakasira ng imahe ng paaralan.</li>
+          <li>16. Ipinagbabawal din ang mambully ng kapwa mag-aaral sa pamamagitan ng pananakit o pag-atake sa kanilang pisikal, emosyonal, at saykolohikal na aspekto.</li>
+          <li>17. Hindi din pinapayagan ang pangingikil o pangongotong ng mag-aaral sa kapwa niya.</li>
+        </ul>
+      </div>
+
+      <!-- GRAVE OFFENSES -->
+      <div class="category-block grave-block">
+        <div class="section-title grave">Grave Offenses</div>
+        <ul class="rule-list">
+          <li>1. Pinagbabawalan ang mga mag-aaral na gumawa ng anumang bagay o gawain na makakasira sa pangalan at reputasyon ng paaralan gaya ng kasiraang-puri (scandal).</li>
+          <li>2. Bawal din silang magtatag, manghikayat o maging kasapi ng mga Fraternity, Gang o Sorority.</li>
+          <li>3. Ipinagbabawal din ang intensyonal na pakikipagsuntukan, pakikipagrambulan at pakikipagbasag-ulo na nagdulot ng malubhang pinsala o "physical injury."</li>
+          <li>4. Bawal din ang intensyonal na pagsunog sa mga pag-aari/kagamitan ng paaralan o arson.</li>
+          <li>5. Bawal din ang pagbebenta, pagdadala sa paaralan at paggamit ng anumang uri ng ipinagbabawal na gamot/droga.</li>
+          <li>6. Bawal din silang manguha o magnakaw ng pag-aari ng paaralan, mga guro at empleyado nito ganundin ng kanilang kamag-aral.</li>
+          <li>7. Ang mga mag-aaral na responsable sa pagkasira ng mga kagamitan ng paaralan ay kinakailangang magpaayos nito o kaya ay palitan kung hindi na kayang ayusin pa.</li>
+          <li>8. Pinagbabawalan din ang mga mag-aaral na maging instrumento ng pang-aabusong sekswal, exhibitionism o pagpapakita ng ari, at pambubugaw o child trafficking.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Filter -->
+  <script src="handbook.js"></script>
+
+</body>
+
+</html>
