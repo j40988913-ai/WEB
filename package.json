@@ -1,0 +1,17 @@
+{
+  "name": "bnhs-portal",
+  "version": "2.0.0",
+  "description": "Batobalani NHS Portal - Node.js + MySQL/TiDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "create-admin": "node create-admin.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "mysql2": "^3.11.0"
+  },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED",
+  "private": true
+}
